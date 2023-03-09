@@ -8,9 +8,9 @@ public class roll : MonoBehaviour
     Using fixed update because we are using unity physics.
     You want a variable that checks if you are moving initially, call a private variable which cannot be changed externally. */
 
-    [SerializeField] private float _rollSpeed = 3;
+    [SerializeField] private float _rollSpeed = 5;
     private bool _isMoving;
-    void Update(){
+    void FixedUpdate(){
 
         if(_isMoving) return;
 
