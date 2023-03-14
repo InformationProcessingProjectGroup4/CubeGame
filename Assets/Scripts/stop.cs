@@ -5,13 +5,9 @@ using UnityEngine;
 public class stop : MonoBehaviour
 {
     public GameObject platform;
-    [SerializeField]private bool stopAnimation = true;
+    [SerializeField] private GameObject player;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(stopAnimation){ platform.GetComponent<Animator>().enabled = false; }
-        else { platform.GetComponent<Animator>().enabled = true; }
-
+    void FixedUpdate(){
+        Debug.Log(player.transform);
     }
 }
