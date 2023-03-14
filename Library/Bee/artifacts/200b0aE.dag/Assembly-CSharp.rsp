@@ -351,6 +351,7 @@
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/fall.cs"
 "Assets/Scripts/followPlayer.cs"
+"Assets/Scripts/Kine.cs"
 "Assets/Scripts/PlatformScript.cs"
 "Assets/Scripts/PlayerCollision.cs"
 "Assets/Scripts/playermovement.cs"
