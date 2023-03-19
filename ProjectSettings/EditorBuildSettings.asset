@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Levels/MainMenu.unity
+    guid: a1df74ec10d134ca1b6230a8e523b9e1
+  - enabled: 1
+    path: Assets/Levels/Leaderboard1.unity
+    guid: df2a42a40b5d34c2994f361c5b5a1b01
+  - enabled: 1
+    path: Assets/Levels/Leaderboard2.unity
+    guid: 0595c219d53324b078df92b830775ce8
+  - enabled: 1
+    path: Assets/Levels/Leaderboard3.unity
+    guid: 95c6046a720e54b32b52e38c65bed1d1
+  - enabled: 1
+    path: Assets/Levels/Level01.unity
+    guid: bb292acbb5ea04fc080e71041b5d7c8a
+  - enabled: 1
+    path: Assets/Levels/Level02.unity
+    guid: 32375030229af4411b7c8544373f4f4e
+  - enabled: 1
+    path: Assets/Levels/Level03.unity
+    guid: 04bf9f52c395940d598ad1ab1159d3b1
+  - enabled: 1
+    path: Assets/Levels/WinScreen1.unity
+    guid: efb892515741c40899c693135ee9878d
+  - enabled: 1
+    path: Assets/Levels/WinScreen2.unity
+    guid: 6cfa4666761b84734bb3faa9b7ae1620
+  - enabled: 1
+    path: Assets/Levels/WinScreen3.unity
+    guid: d2a8eb08275c748a0b22235f81229947
+  - enabled: 1
+    path: Assets/Levels/LoseScreen.unity
+    guid: b20fa62e741af4595a225c751898aa55
+  m_configObjects: {}
