@@ -35,7 +35,7 @@ public class ScenesManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(fetchProgress());
-        StartCoroutine(fetchLeaderBoard()); // change the count to 4 when actually playing.
+        StartCoroutine(fetchLeaderBoard());
         // maybe call leaderboard and progress for each scene at the start so that we can load the leaderboard with information
     }
 
