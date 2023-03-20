@@ -143,8 +143,6 @@ public class ScenesManager : MonoBehaviour
             else
             {
                 string json = request.downloadHandler.text;
-                serverlevel = progressresponse.JSONify(json).level;
-                serverscores = progressresponse.JSONify(json).score;
 
                 if (progressresponse.JSONify(json).status == "error") {
                     _userexists = false;
