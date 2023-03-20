@@ -1,35 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Leaderboard : MonoBehaviour
 {
+    public Text name1;
+    public Text name2;
+    public Text name3;
+    public Text name4;
+    public Text score1;
+    public Text score2;
+    public Text score3;
+    public Text score4;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(getValues());
+
+        Debug.Log(ScenesManager._level);
     }
 
-    //dont think i need to update for this method 
-
-    IEnumerator getValues(){ // this function is NOT COMPLETE. FINISH THIS!!
-        writeLeaderboard Leaderboard = new writeLeaderboard{
-            level = 1, 
-            count = 4
-        };
-
-        Debug.Log(Leaderboard.Convert());
-        yield return new WaitForSeconds(1);
-    }
-}
-
-public class writeLeaderboard : MonoBehaviour 
-{
-    public int level;
-    public int count;
-
-    public string Convert()
-    {
-        return "["+JsonUtility.ToJson(this)+"]";
-    }
 }
