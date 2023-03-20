@@ -29,7 +29,7 @@ public class ScenesManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(fetchProgress());
-        StartCoroutine(fetchLeaderBoard(((int)_level-1), 2)); // change the count to 4 when actually playing.
+        StartCoroutine(fetchLeaderBoard(2)); // change the count to 4 when actually playing.
         // maybe call leaderboard and progress for each scene at the start so that we can load the leaderboard with information
     }
 
@@ -159,20 +159,19 @@ public class ScenesManager : MonoBehaviour
         }
     }
 
-    public static IEnumerator fetchLeaderBoard(int level, int count)
+    public static IEnumerator fetchLeaderBoard(int count)
     {
 
         leaderboardrequest prereq = new leaderboardrequest
         {
-            level = level,
             count = count 
         };
 
-        string[] data = { prereq.Convert() };
+        string data = prereq.Convert();
 
-        string jsondata = JsonUtility.ToJson(data);
+        //string jsondata = JsonUtility.ToJson(data);
 
-        using (UnityWebRequest request = UnityWebRequest.Put("http://ec2-35-177-122-51.eu-west-2.compute.amazonaws.com:5000/api/leaderboard", jsondata))
+        using (UnityWebRequest request = UnityWebRequest.Put("http://ec2-35-177-122-51.eu-west-2.compute.amazonaws.com:5000/api/leaderboard", data))
         {
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
@@ -266,7 +265,6 @@ public class sendusername
 
 public class leaderboardrequest
 {
-    public int level;
     public int count;
 
     public string Convert()
