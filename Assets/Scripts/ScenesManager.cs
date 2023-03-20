@@ -26,7 +26,7 @@ public class ScenesManager : MonoBehaviour
     public static List<int> leaderscores0;
     public static List<int> leaderscores1;
     public static List<int> leaderscores2;
-    public bool _userexists = false;
+    public static bool _userexists = true;
 
 
     private void Awake() {
@@ -36,6 +36,11 @@ public class ScenesManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(fetchProgress());
+        if (!_userexists) {
+            StartCoroutine(updateProgress());
+            StartCoroutine(fetchProgress());
+            Debug.Log("user created");
+        }
         StartCoroutine(fetchLeaderBoard());
         // maybe call leaderboard and progress for each scene at the start so that we can load the leaderboard with information
     }
@@ -142,7 +147,12 @@ public class ScenesManager : MonoBehaviour
                 serverscores = progressresponse.JSONify(json).score;
 
                 if (progressresponse.JSONify(json).status == "error") {
-                    Debug.Log("user not assigned");
+                    _userexists = false;
+                }
+                else {
+                    _userexists = true;
+                    serverlevel = progressresponse.JSONify(json).level;
+                    serverscores = progressresponse.JSONify(json).score;
                 }
             }
         }
