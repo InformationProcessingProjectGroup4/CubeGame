@@ -37,7 +37,7 @@ public class win1 : MonoBehaviour
     {
         if (ScenesManager.win)
         {
-            ScenesManager._score = (float)Convert.ToDouble(score_text.text);
+            ScenesManager._score = 1000/(float)Convert.ToDouble(score_text.text);
             StartCoroutine(ScenesManager.updateProgress());
             ScenesManager.Instance.LoadScene(ScenesManager.Scene.WinScreen1);
         }
