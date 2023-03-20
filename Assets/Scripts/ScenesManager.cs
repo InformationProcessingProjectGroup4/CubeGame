@@ -191,8 +191,15 @@ public class ScenesManager : MonoBehaviour
                 leadernames1 = _leaderres.data.username1;
                 leadernames2 = _leaderres.data.username2;
                 leaderscores0 = _leaderres.data.score0;
-                leaderscores0 = _leaderres.data.score1;
-                leaderscores0 = _leaderres.data.score2;
+                leaderscores1 = _leaderres.data.score1;
+                leaderscores2 = _leaderres.data.score2;
+
+                Debug.Log(leadernames0.Count);
+                Debug.Log(leadernames1.Count);
+                Debug.Log(leadernames2.Count);
+                Debug.Log(leaderscores0.Count);
+                Debug.Log(leaderscores1.Count);
+                Debug.Log(leaderscores2.Count);
             }
         }
 
