@@ -10,6 +10,6 @@ public class printScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scorepnt.text = ScenesManager._score.ToString();
+        scorepnt.text = ((int)ScenesManager._score).ToString();
     }
 }
