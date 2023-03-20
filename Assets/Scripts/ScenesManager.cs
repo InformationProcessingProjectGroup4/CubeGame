@@ -20,6 +20,9 @@ public class ScenesManager : MonoBehaviour
     public static float _levelz = 0;
     public static int[] serverlevel = {0, 0, 0};
     public static int[] serverscores = {0, 0, 0};
+    public static List<string> leadernames0;
+    public static List<string> leadernames1;
+    public static List<string> leadernames2;
 
 
     private void Awake() {
@@ -180,7 +183,8 @@ public class ScenesManager : MonoBehaviour
             else
             {
                 string json = request.downloadHandler.text;
-                Debug.Log(json); 
+                leaderboardresponse _leaderres = JsonUtility.FromJson<leaderboardresponse>(json);
+                Debug.Log(_leaderres.data.score0[0]); 
             }
         }
 
@@ -274,29 +278,29 @@ public class leaderboardrequest
 [System.Serializable]
 public class leaderboardresponse
 {
+    public leaderdatainstance data;
     public string status;
-    public List<string> username0;
 
-    public static leaderboardresponse JSONify(string res)
-    {
-        return JsonUtility.FromJson<leaderboardresponse>(res);
+    public leaderboardresponse(leaderdatainstance _data, string _status) {
+        this.data = _data;
+        this.status = _status;
     }
 }
 
 [System.Serializable]
 public class leaderdatainstance
 {
-    int level0;
-    int level1;
-    int level2;
-    string[] score0;
-    string[] score1;
-    string[] score2;
-    string[] username0;
-    string[] username1;
-    string[] username2;
+    public int level0;
+    public int level1;
+    public int level2;
+    public List<string> score0;
+    public List<string> score1;
+    public List<string> score2;
+    public List<string> username0;
+    public List<string> username1;
+    public List<string> username2;
 
-    public leaderdatainstance(int _level0, int _level1, int _level2, string[] _score0, string[] _score1, string[] _score2, string[] _username0, string[] _username1, string[] _username2) {
+    public leaderdatainstance(int _level0, int _level1, int _level2, List<string> _score0, List<string> _score1, List<string> _score2, List<string> _username0, List<string> _username1, List<string> _username2) {
         this.level0 = _level0;
         this.level1 = _level1;
         this.level2 = _level2;
