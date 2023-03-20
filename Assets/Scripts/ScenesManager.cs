@@ -29,7 +29,7 @@ public class ScenesManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(fetchProgress());
-        StartCoroutine(fetchLeaderBoard(2)); // change the count to 4 when actually playing.
+        StartCoroutine(fetchLeaderBoard()); // change the count to 4 when actually playing.
         // maybe call leaderboard and progress for each scene at the start so that we can load the leaderboard with information
     }
 
@@ -131,7 +131,6 @@ public class ScenesManager : MonoBehaviour
             else
             {
                 string json = request.downloadHandler.text;
-
                 serverlevel = progressresponse.JSONify(json).level;
                 serverscores = progressresponse.JSONify(json).score;
             }
@@ -154,17 +153,18 @@ public class ScenesManager : MonoBehaviour
             else
             {
                 string json = request.downloadHandler.text;
+
                 Debug.Log(json);
             }
         }
     }
 
-    public static IEnumerator fetchLeaderBoard(int count)
+    public static IEnumerator fetchLeaderBoard()
     {
 
         leaderboardrequest prereq = new leaderboardrequest
         {
-            count = count 
+            count = 4
         };
 
         string data = prereq.Convert();
@@ -182,7 +182,8 @@ public class ScenesManager : MonoBehaviour
             else
             {
                 string json = request.downloadHandler.text;
-                Debug.Log(json);
+                string[] resdata = leaderboardresponse.JSONify(json).data;
+                Debug.Log(resdata);
             }
         }
 
@@ -275,13 +276,11 @@ public class leaderboardrequest
 
 public class leaderboardresponse
 {
+    public string[] data;
     public string status;
-    public string level;
-    public string[] players;
-    public int[] scores;
 
-    public static leaderboardresponse JSONify(string data)
+    public static leaderboardresponse JSONify(string res)
     {
-        return JsonUtility.FromJson<leaderboardresponse>(data);
+        return JsonUtility.FromJson<leaderboardresponse>(res);
     }
 }
