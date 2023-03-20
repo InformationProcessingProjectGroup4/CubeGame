@@ -174,6 +174,7 @@ public class ScenesManager : MonoBehaviour
                 string json = request.downloadHandler.text;
 
                 Debug.Log(json);
+                data = null;
             }
         }
     }
