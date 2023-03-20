@@ -169,8 +169,6 @@ public class ScenesManager : MonoBehaviour
 
         string data = prereq.Convert();
 
-        //string jsondata = JsonUtility.ToJson(data);
-
         using (UnityWebRequest request = UnityWebRequest.Put("http://ec2-35-177-122-51.eu-west-2.compute.amazonaws.com:5000/api/leaderboard", data))
         {
             request.SetRequestHeader("Content-Type", "application/json");
@@ -182,8 +180,7 @@ public class ScenesManager : MonoBehaviour
             else
             {
                 string json = request.downloadHandler.text;
-                string[] resdata = leaderboardresponse.JSONify(json).data;
-                Debug.Log(resdata);
+                Debug.Log(json); 
             }
         }
 
@@ -274,13 +271,40 @@ public class leaderboardrequest
     }
 }
 
+[System.Serializable]
 public class leaderboardresponse
 {
-    public string[] data;
     public string status;
+    public List<string> username0;
 
     public static leaderboardresponse JSONify(string res)
     {
         return JsonUtility.FromJson<leaderboardresponse>(res);
+    }
+}
+
+[System.Serializable]
+public class leaderdatainstance
+{
+    int level0;
+    int level1;
+    int level2;
+    string[] score0;
+    string[] score1;
+    string[] score2;
+    string[] username0;
+    string[] username1;
+    string[] username2;
+
+    public leaderdatainstance(int _level0, int _level1, int _level2, string[] _score0, string[] _score1, string[] _score2, string[] _username0, string[] _username1, string[] _username2) {
+        this.level0 = _level0;
+        this.level1 = _level1;
+        this.level2 = _level2;
+        this.score0 = _score0;
+        this.score1 = _score1;
+        this.score2 = _score2;
+        this.username0 = _username0;
+        this.username1 = _username1;
+        this.username2 = _username2;
     }
 }
