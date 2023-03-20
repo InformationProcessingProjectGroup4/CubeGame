@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using System;
 
 public class losecondition : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class losecondition : MonoBehaviour
         {
             ScenesManager.lose = true;
             ScenesManager.finish = true;
-            ScenesManager._score = float.Parse(score_text_lose.text.ToString());
+            ScenesManager._score = (float)Math.Round(1000/float.Parse(score_text_lose.text.ToString()), 2);
             ScenesManager.Instance.LoadLoseScreen();
             //Debug.Log(score_text_lose.text.ToString());
         }
