@@ -12,7 +12,7 @@ public class ScenesManager : MonoBehaviour
     public static bool win = false;
     public static bool lose = false;
     public static bool finish = false;
-    public static string _username = "_newuser"; // default, remember to change this, actually might not have to if we overwrite this
+    public static string _username = "_newtest"; // default, remember to change this, actually might not have to if we overwrite this
     public static float _level = 1;
     public static float _score = 9.87f;
     public static float _levelx = 0;
@@ -26,6 +26,7 @@ public class ScenesManager : MonoBehaviour
     public static List<int> leaderscores0;
     public static List<int> leaderscores1;
     public static List<int> leaderscores2;
+    public bool _userexists = false;
 
 
     private void Awake() {
@@ -90,7 +91,7 @@ public class ScenesManager : MonoBehaviour
         return array;
     }
 
-    public static writeLevelData createData(int[] tmpscore, int[]tmplevel, writeprogress _lvlprog)
+    public static writeLevelData createData(int[] tmpscore, int[] tmplevel, writeprogress _lvlprog)
     {
         return new writeLevelData
         {
@@ -139,6 +140,10 @@ public class ScenesManager : MonoBehaviour
                 string json = request.downloadHandler.text;
                 serverlevel = progressresponse.JSONify(json).level;
                 serverscores = progressresponse.JSONify(json).score;
+
+                if (progressresponse.JSONify(json).status == "error") {
+                    Debug.Log("user not assigned");
+                }
             }
         }
     }
@@ -193,13 +198,6 @@ public class ScenesManager : MonoBehaviour
                 leaderscores0 = _leaderres.data.score0;
                 leaderscores1 = _leaderres.data.score1;
                 leaderscores2 = _leaderres.data.score2;
-
-                Debug.Log(leadernames0.Count);
-                Debug.Log(leadernames1.Count);
-                Debug.Log(leadernames2.Count);
-                Debug.Log(leaderscores0.Count);
-                Debug.Log(leaderscores1.Count);
-                Debug.Log(leaderscores2.Count);
             }
         }
 
@@ -257,6 +255,7 @@ public class readprogress
     }
 }
 
+[System.Serializable]
 public class progressresponse
 {
     public string status;
@@ -268,7 +267,7 @@ public class progressresponse
     {
         return JsonUtility.FromJson<progressresponse>(data);
     }
-};
+}
 
 public class sendusername
 {
@@ -278,7 +277,7 @@ public class sendusername
     {
         return JsonUtility.ToJson(this);
     }
-};
+}
 
 public class leaderboardrequest
 {
