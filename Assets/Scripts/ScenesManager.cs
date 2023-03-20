@@ -23,6 +23,9 @@ public class ScenesManager : MonoBehaviour
     public static List<string> leadernames0;
     public static List<string> leadernames1;
     public static List<string> leadernames2;
+    public static List<int> leaderscores0;
+    public static List<int> leaderscores1;
+    public static List<int> leaderscores2;
 
 
     private void Awake() {
@@ -184,7 +187,12 @@ public class ScenesManager : MonoBehaviour
             {
                 string json = request.downloadHandler.text;
                 leaderboardresponse _leaderres = JsonUtility.FromJson<leaderboardresponse>(json);
-                Debug.Log(_leaderres.data.score0[0]); 
+                leadernames0 = _leaderres.data.username0;
+                leadernames1 = _leaderres.data.username1;
+                leadernames2 = _leaderres.data.username2;
+                leaderscores0 = _leaderres.data.score0;
+                leaderscores0 = _leaderres.data.score1;
+                leaderscores0 = _leaderres.data.score2;
             }
         }
 
@@ -293,14 +301,14 @@ public class leaderdatainstance
     public int level0;
     public int level1;
     public int level2;
-    public List<string> score0;
-    public List<string> score1;
-    public List<string> score2;
+    public List<int> score0;
+    public List<int> score1;
+    public List<int> score2;
     public List<string> username0;
     public List<string> username1;
     public List<string> username2;
 
-    public leaderdatainstance(int _level0, int _level1, int _level2, List<string> _score0, List<string> _score1, List<string> _score2, List<string> _username0, List<string> _username1, List<string> _username2) {
+    public leaderdatainstance(int _level0, int _level1, int _level2, List<int> _score0, List<int> _score1, List<int> _score2, List<string> _username0, List<string> _username1, List<string> _username2) {
         this.level0 = _level0;
         this.level1 = _level1;
         this.level2 = _level2;
