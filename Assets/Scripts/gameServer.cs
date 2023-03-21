@@ -7,7 +7,7 @@ public class gameServer : MonoBehaviour
 {
     public string current_user;
     public string password;
-    private bool signed_up = true; // change back to false when deploying
+    private bool signed_up = false; // change back to false when deploying
     [SerializeField]private bool verified = false;
     // Start is called before the first frame update
     void Start()
