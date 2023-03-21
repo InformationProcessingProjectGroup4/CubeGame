@@ -22,6 +22,7 @@ public class gameServer : MonoBehaviour
         if(!signed_up){
             StartCoroutine(createUser());
             signed_up = true;
+            ScenesManager._username = current_user;
         }
 
         if(!verified){
