@@ -1,6 +1,2 @@
 # CubeGame
-
-## Things to do:
-1. Add a game over screen
-2. Add levels 1 and 2
-3. Add a pause menu
+This is a game built using Unity and C#, with the help of an AWS server (see CubeServer).
