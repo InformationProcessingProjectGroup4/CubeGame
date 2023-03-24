@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class roll : MonoBehaviour
 {
@@ -37,6 +38,40 @@ public class roll : MonoBehaviour
         if(Input.GetKey(KeyCode.W)) Assemble(Vector3.forward);
         if(Input.GetKey(KeyCode.S)) Assemble(Vector3.back);
         if(Input.GetKey(KeyCode.D)) Assemble(Vector3.right);
+
+        FileStream fileStream = new FileStream("controller.txt", FileMode.Open,FileAccess.ReadWrite,FileShare.ReadWrite);
+
+        // Wrap the file stream in a StreamReader to read text data.
+        StreamReader streamReader = new StreamReader(fileStream);
+
+        string line = streamReader.ReadLine();
+        Debug.Log(line);
+            if (line == null)
+            {
+                // If we've reached the end of the file, reset the stream and start over.
+                streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
+            }
+            else
+            {
+                switch (line)
+                    {
+                        case "l":
+                            Assemble(Vector3.left);
+                            break;
+                        case "f":
+                            Assemble(Vector3.forward);
+                            break;
+                        case "b":
+                            Assemble(Vector3.back);
+                            break;
+                        case "r":
+                            Assemble(Vector3.right);
+                            break;
+                        default:
+                            break;
+                    }
+            }
+
 
         void Assemble(Vector3 dir){
 

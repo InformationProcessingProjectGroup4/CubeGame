@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -24,6 +25,24 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        FileStream fileStream = new FileStream("pause.txt", FileMode.Open,FileAccess.ReadWrite,FileShare.ReadWrite);
+
+        // Wrap the file stream in a StreamReader to read text data.
+        StreamReader streamReader = new StreamReader(fileStream);
+
+        string line = streamReader.ReadLine();
+        Debug.Log(line);
+            if (line == "p")
+            {  
+                if(GameIsPaused){
+                Resume();
+                } 
+                else 
+                {
+                Pause();
+                }
+            }
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {

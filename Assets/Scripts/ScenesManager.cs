@@ -12,7 +12,7 @@ public class ScenesManager : MonoBehaviour
     public static bool win = false;
     public static bool lose = false;
     public static bool finish = false;
-    public static string _username = "_newtest"; // default, remember to change this, actually might not have to if we overwrite this
+    public static string _username = "hisjsdjk"; // default, remember to change this, actually might not have to if we overwrite this
     public static float _level = 1;
     public static float _score = 9.87f;
     public static float _levelx = 0;
@@ -26,7 +26,7 @@ public class ScenesManager : MonoBehaviour
     public static List<int> leaderscores0;
     public static List<int> leaderscores1;
     public static List<int> leaderscores2;
-    public static bool _userexists = true;
+    public static bool _userexists = false;
 
 
     private void Awake() {
@@ -37,7 +37,7 @@ public class ScenesManager : MonoBehaviour
     {
         StartCoroutine(fetchProgress());
         if (!_userexists) {
-            StartCoroutine(updateProgress());
+            StartCoroutine(createProgress());
             StartCoroutine(fetchProgress());
             Debug.Log("user created");
         }
@@ -103,7 +103,16 @@ public class ScenesManager : MonoBehaviour
             username = _username,
             score = parseData((int)_level-1, (int)_score, tmpscore),
             level = parseData((int)_level - 1, 2, tmplevel),
-            progress = _lvlprog.Convert(),
+            progress = _lvlprog.Convert()
+        };
+    }
+
+    public static createuser blankData()
+    {
+        return new createuser
+        {
+            username = _username,
+            password = "xyz"
         };
     }
 
@@ -146,12 +155,35 @@ public class ScenesManager : MonoBehaviour
 
                 if (progressresponse.JSONify(json).status == "error") {
                     _userexists = false;
+                    Debug.Log("fix the error");
                 }
                 else {
                     _userexists = true;
                     serverlevel = progressresponse.JSONify(json).level;
                     serverscores = progressresponse.JSONify(json).score;
                 }
+            }
+        }
+    }
+
+    public static IEnumerator createProgress()
+    {
+        string data = blankData().Convert();
+        Debug.Log(data);
+        using (UnityWebRequest request = UnityWebRequest.Put("http://ec2-35-177-122-51.eu-west-2.compute.amazonaws.com:5000/api/user/add", data))
+        {
+            request.SetRequestHeader("Content-Type", "application/json");
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.LogError(request.error);
+            }
+            else
+            {
+                string json = request.downloadHandler.text;
+
+                Debug.Log(json);
             }
         }
     }
@@ -174,7 +206,6 @@ public class ScenesManager : MonoBehaviour
                 string json = request.downloadHandler.text;
 
                 Debug.Log(json);
-                data = null;
             }
         }
     }
@@ -261,6 +292,17 @@ public class readprogress
     public static readprogress JSONify(string data)
     {
         return JsonUtility.FromJson<readprogress>(data);
+    }
+}
+
+public class createuser
+{
+    public string username;
+    public string password;
+
+    public string Convert()
+    {
+        return JsonUtility.ToJson(this);
     }
 }
 
